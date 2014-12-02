@@ -6,7 +6,7 @@ package com.github.thatnerdjack.battleship;
 public class Battleship {
 
     public static void main(String args[]) {
-        //code here
+        Map map = new Map();
     }
 
 }
