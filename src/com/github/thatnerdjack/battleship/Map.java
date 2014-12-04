@@ -19,4 +19,10 @@ public class Map {
         }
     }
 
+    public static void printMap() {
+        for(ArrayList<Boolean> innerList : rows) {
+            System.out.println(innerList);
+        }
+    }
+
 }

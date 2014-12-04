@@ -12,6 +12,8 @@ public class Battleship {
     public static void main(String args[]) {
         Map map = new Map();
         ShipBattle shipBattle1 = new ShipBattle();
+        shipBattle1.genLocation();
+        shipBattle1.dropToMap();
     }
 
 }
