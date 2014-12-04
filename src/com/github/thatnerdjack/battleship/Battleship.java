@@ -5,8 +5,13 @@ package com.github.thatnerdjack.battleship;
  */
 public class Battleship {
 
+    public static int getRandomInt(int max) {
+        return (int)(Math.random()*max + 1);
+    }
+
     public static void main(String args[]) {
         Map map = new Map();
+        ShipBattle shipBattle1 = new ShipBattle();
     }
 
 }

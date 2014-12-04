@@ -6,9 +6,9 @@ import java.util.ArrayList;
  * Created by block7 on 12/2/14.
  */
 public class Map {
+    public static ArrayList<ArrayList<Boolean>> rows = new ArrayList<ArrayList<Boolean>>();
 
     public Map() {
-        ArrayList<ArrayList<Boolean>> rows = new ArrayList<ArrayList<Boolean>>();
         for(int i = 0; i < 10; i++) {
             rows.add(new ArrayList<Boolean>());
         }
