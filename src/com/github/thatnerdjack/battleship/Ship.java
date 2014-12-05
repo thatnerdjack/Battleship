@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by block7 on 12/2/14.
  */
 abstract public class Ship {
+    String shipName;
     int shipSize;
     public int shipHealth;
     boolean isVertical;
@@ -13,10 +14,12 @@ abstract public class Ship {
     int topLeftY;
     ArrayList<Integer> xCoords = new ArrayList<Integer>();
     ArrayList<Integer> yCoords = new ArrayList<Integer>();
+    Map shipMap = new Map();
 
-    public Ship(int shipSize) {
+    public Ship(int shipSize, String shipName) {
         this.shipSize = shipSize;
         this.shipHealth = shipSize;
+        this.shipName = shipName;
         if(Battleship.getRandomInt(2) == 1) {
             isVertical = false;
         } else {
@@ -50,6 +53,7 @@ abstract public class Ship {
             int xCoord = xCoords.get(i) - 1;
             int yCoord = yCoords.get(i) - 1;
             map.rows.get(yCoord).set(xCoord, true);
+            shipMap.rows.get(yCoord).set(xCoord, true);
         }
     }
 
@@ -71,6 +75,29 @@ abstract public class Ship {
         }
     }
 
-//    public boolean didHit()
+    public static boolean didHit(int xCoord, int yCoord, Map map) {
+        if(map.rows.get(yCoord).get(xCoord)) {
+            for(int i = 0; i < 5; i++) {
+                Battleship.ships[i].completeHit(xCoord, yCoord);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void completeHit(int xCoord, int yCoord) {
+        if(shipMap.rows.get(yCoord).get(xCoord)) {
+            shipHealth -= 1;
+            if(shipHealth < 1) {
+                System.out.println("You sunk my " + shipName + "!");
+            } else if(shipHealth > 1) {
+                System.out.println("You hit one of my ships!");
+            }
+            for(int i = 0; i < 5; i++) {
+                //START HERE!!! Write method that checks if all ships are gone, then finish main.
+            }
+        }
+    }
 
 }

@@ -9,9 +9,11 @@ import java.io.InputStreamReader;
  * Created by block7 on 12/2/14.
  */
 public class Battleship {
-    int shotCount = 0;
-    final static String possibleXCoords = "abcdefghijkl";
+    static int shotCount = 0;
+    final static String possibleXCoords = "abcdefghij";
     final static String possibleYNums = "123456789";
+    static Ship[] ships;
+    static boolean running;
 
     public static String readLine(String prompt) {
         String line = null;
@@ -31,8 +33,8 @@ public class Battleship {
     }
 
     public static boolean isValidAnswer(String input) {
-        String xCoord = input.substring(1);
-        String yNum = input.substring(2);
+        String xCoord = String.valueOf(input.charAt(1));
+        String yNum = String.valueOf(input.charAt(2));
         if(!possibleXCoords.contains(xCoord)) {
             return false;
         } else if(!possibleYNums.contains(yNum)) {
@@ -42,16 +44,36 @@ public class Battleship {
         }
     }
 
-//    public static int xLevelString(String input) {
-//        String string = "b";
-//        string.
-//    }
+    public static int xLevelStringToInt(String input) {
+        input = String.valueOf(input.charAt(1));
+        if(input == "a") {
+            return 0;
+        } else if(input == "b") {
+            return 1;
+        } else if(input == "c") {
+            return 2;
+        } else if(input == "d") {
+            return 3;
+        } else if(input == "e") {
+            return 4;
+        } else if(input == "f") {
+            return 5;
+        } else if(input == "g") {
+            return 6;
+        } else if(input == "h") {
+            return 7;
+        } else if(input == "i") {
+            return 8;
+        } else {
+            return 9;
+        }
+    }
 
     public static int yLevelStringToInt(String input) {
         if(input.length() == 3) {
             return 10;
         } else {
-            String tryInput = String.valueOf(input.charAt(2));
+            String tryInput = String.valueOf(input.charAt(1));
             int iValue = Integer.parseInt(tryInput);
             return iValue;
         }
@@ -70,18 +92,23 @@ public class Battleship {
         ShipSubmarine shipSubmarine = new ShipSubmarine();
         ShipDestroyer shipDestroyer = new ShipDestroyer();
         ShipPatrol shipPatrol = new ShipPatrol();
-        Ship[] ships = {shipCarrier, shipBattle, shipSubmarine, shipDestroyer, shipPatrol};
+        ships = new Ship[]{shipCarrier, shipBattle, shipSubmarine, shipDestroyer, shipPatrol};
         Ship.shipStart(ships, rawMap);
         System.out.println("The ships' have been placed on the map and their positions randomized.");
         System.out.println("Your task is to destroy these ships.");
-        boolean running = true;
+        running = true;
         while(running) {
             String answer = readLine("Please enter your target coordinates:");
+            shotCount += 1;
             answer = answer.toLowerCase();
             if(isValidAnswer(answer)) {
-
+                int xCoord = xLevelStringToInt(answer);
+                int yCoord = yLevelStringToInt(answer);
+                if(Ship.didHit(xCoord, yCoord, rawMap)) {
+                    playerMap.rows.get(yCoord).set(xCoord, true);
+                    System.out.println("You've shot " + shotCount + " times.");
+                }
             }
-        }
-    }
 
+    }
 }

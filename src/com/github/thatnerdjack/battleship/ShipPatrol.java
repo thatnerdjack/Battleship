@@ -6,7 +6,7 @@ package com.github.thatnerdjack.battleship;
 public class ShipPatrol extends Ship{
 
     public ShipPatrol() {
-        super(2);
+        super(2, "patrol boat");
     }
 
 }

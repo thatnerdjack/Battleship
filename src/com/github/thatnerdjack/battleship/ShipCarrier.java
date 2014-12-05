@@ -6,7 +6,7 @@ package com.github.thatnerdjack.battleship;
 public class ShipCarrier extends Ship{
 
     public ShipCarrier() {
-        super(5);
+        super(5, "aircraft carrier");
     }
 
 }
