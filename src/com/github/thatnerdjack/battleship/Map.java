@@ -21,7 +21,16 @@ public class Map {
 
     public static void printMap() {
         for(ArrayList<Boolean> innerList : rows) {
-            System.out.println(innerList);
+            String returnString = "";
+            for(Boolean isShipThere : innerList) {
+                if(isShipThere) {
+                    returnString += "*";
+                } else {
+                    returnString += "_";
+                }
+                returnString += " ";
+            }
+            System.out.println(returnString);
         }
     }
 

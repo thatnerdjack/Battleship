@@ -22,7 +22,7 @@ abstract public class Ship {
         }
     }
 
-    public void genLocation() {
+    public void genLocation(Map map) {
         if(isVertical) {
             topLeftY = Battleship.getRandomInt(10 - shipSize);
             topLeftX = Battleship.getRandomInt(10);
@@ -38,28 +38,35 @@ abstract public class Ship {
                 xCoords.add(i, topLeftX + i);
             }
         }
-        if(!doesFit()) {
-            genLocation();
+        if(!doesFit(map)) {
+            genLocation(map);
         }
     }
 
-    public void dropToMap() {
+    public void dropToMap(Map map) {
         for(int i = 0; i < shipSize; i++) {
             int xCoord = xCoords.get(i) - 1;
             int yCoord = yCoords.get(i) - 1;
-            Map.rows.get(yCoord).set(xCoord, true);
+            map.rows.get(yCoord).set(xCoord, true);
         }
     }
 
-    public boolean doesFit() {
+    public boolean doesFit(Map map) {
         for(int i = 0; i < shipSize; i++) {
             int xCoord = xCoords.get(i) - 1;
             int yCoord = yCoords.get(i) - 1;
-            if(Map.rows.get(yCoord).get(xCoord) == true) {
+            if(map.rows.get(yCoord).get(xCoord) == true) {
                 return false;
             }
         }
         return true;
+    }
+
+    public static void shipStart(Ship[] ships, Map map) {
+        for(Ship ship : ships) {
+            ship.genLocation(map);
+            ship.dropToMap(map);
+        }
     }
 
 //    public boolean didHit()
