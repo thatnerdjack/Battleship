@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 abstract public class Ship {
     int shipSize;
+    public int shipHealth;
     boolean isVertical;
     int topLeftX;
     int topLeftY;
@@ -15,6 +16,7 @@ abstract public class Ship {
 
     public Ship(int shipSize) {
         this.shipSize = shipSize;
+        this.shipHealth = shipSize;
         if(Battleship.getRandomInt(2) == 1) {
             isVertical = false;
         } else {
