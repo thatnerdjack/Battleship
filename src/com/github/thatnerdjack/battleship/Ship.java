@@ -91,7 +91,7 @@ abstract public class Ship {
             shipHealth -= 1;
             if(shipHealth < 1) {
                 System.out.println("You sunk my " + shipName + "!");
-            } else if(shipHealth > 1) {
+            } else if(shipHealth >= 1) {
                 System.out.println("You hit one of my ships!");
             }
             int deadShips = 0;

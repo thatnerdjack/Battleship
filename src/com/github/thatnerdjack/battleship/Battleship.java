@@ -75,7 +75,7 @@ public class Battleship {
         } else {
             String tryInput = String.valueOf(input.charAt(1));
             int iValue = Integer.parseInt(tryInput);
-            return iValue;
+            return iValue - 1;
         }
     }
 
@@ -98,7 +98,6 @@ public class Battleship {
         System.out.println("Your task is to destroy these ships.");
         running = true;
         while (running) {
-            Map.printMap(rawMap);
             String answer = readLine("Please enter your target coordinates:");
             shotCount += 1;
             answer = answer.toLowerCase();
