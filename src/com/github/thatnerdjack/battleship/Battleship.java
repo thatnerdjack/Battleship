@@ -33,6 +33,10 @@ public class Battleship {
     }
 
     public static boolean isValidAnswer(String input) {
+        if(input.length() < 2) {
+            System.out.println("Not a valid coordinate.");
+            return false;
+        }
         String xCoord = String.valueOf(input.charAt(0));
         String yNum = String.valueOf(input.charAt(1));
         if (!possibleXCoords.contains(xCoord)) {
@@ -98,6 +102,7 @@ public class Battleship {
         System.out.println("Your task is to destroy these ships.");
         running = true;
         while (running) {
+            Map.printMap(rawMap);
             String answer = readLine("Please enter your target coordinates:");
             shotCount += 1;
             answer = answer.toLowerCase();
