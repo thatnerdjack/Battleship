@@ -94,8 +94,14 @@ abstract public class Ship {
             } else if(shipHealth > 1) {
                 System.out.println("You hit one of my ships!");
             }
+            int deadShips = 0;
             for(int i = 0; i < 5; i++) {
-                //START HERE!!! Write method that checks if all ships are gone, then finish main.
+                if(Battleship.ships[i].shipHealth < 1) {
+                    deadShips += 1;
+                }
+            }
+            if(deadShips == 5) {
+                Battleship.running = false;
             }
         }
     }

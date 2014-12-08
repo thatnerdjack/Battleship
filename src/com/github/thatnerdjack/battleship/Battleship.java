@@ -33,11 +33,11 @@ public class Battleship {
     }
 
     public static boolean isValidAnswer(String input) {
-        String xCoord = String.valueOf(input.charAt(1));
-        String yNum = String.valueOf(input.charAt(2));
-        if(!possibleXCoords.contains(xCoord)) {
+        String xCoord = String.valueOf(input.charAt(0));
+        String yNum = String.valueOf(input.charAt(1));
+        if (!possibleXCoords.contains(xCoord)) {
             return false;
-        } else if(!possibleYNums.contains(yNum)) {
+        } else if (!possibleYNums.contains(yNum)) {
             return false;
         } else {
             return true;
@@ -45,24 +45,24 @@ public class Battleship {
     }
 
     public static int xLevelStringToInt(String input) {
-        input = String.valueOf(input.charAt(1));
-        if(input == "a") {
+        input = String.valueOf(input.charAt(0));
+        if (input.equals("a")) {
             return 0;
-        } else if(input == "b") {
+        } else if (input.equals("b")) {
             return 1;
-        } else if(input == "c") {
+        } else if (input.equals("c")) {
             return 2;
-        } else if(input == "d") {
+        } else if (input.equals("d")) {
             return 3;
-        } else if(input == "e") {
+        } else if (input.equals("e")) {
             return 4;
-        } else if(input == "f") {
+        } else if (input.equals("f")) {
             return 5;
-        } else if(input == "g") {
+        } else if (input.equals("g")) {
             return 6;
-        } else if(input == "h") {
+        } else if (input.equals("h")) {
             return 7;
-        } else if(input == "i") {
+        } else if (input.equals("i")) {
             return 8;
         } else {
             return 9;
@@ -70,7 +70,7 @@ public class Battleship {
     }
 
     public static int yLevelStringToInt(String input) {
-        if(input.length() == 3) {
+        if (input.length() == 3) {
             return 10;
         } else {
             String tryInput = String.valueOf(input.charAt(1));
@@ -80,7 +80,7 @@ public class Battleship {
     }
 
     public static int getRandomInt(int max) {
-        return (int)(Math.random()*max + 1);
+        return (int) (Math.random() * max + 1);
     }
 
     public static void main(String args[]) {
@@ -97,18 +97,22 @@ public class Battleship {
         System.out.println("The ships' have been placed on the map and their positions randomized.");
         System.out.println("Your task is to destroy these ships.");
         running = true;
-        while(running) {
+        while (running) {
+            Map.printMap(rawMap);
             String answer = readLine("Please enter your target coordinates:");
             shotCount += 1;
             answer = answer.toLowerCase();
-            if(isValidAnswer(answer)) {
+            if (isValidAnswer(answer)) {
                 int xCoord = xLevelStringToInt(answer);
                 int yCoord = yLevelStringToInt(answer);
-                if(Ship.didHit(xCoord, yCoord, rawMap)) {
+                if (Ship.didHit(xCoord, yCoord, rawMap)) {
                     playerMap.rows.get(yCoord).set(xCoord, true);
                     System.out.println("You've shot " + shotCount + " times.");
+                } else {
+                    System.out.println("You missed.");
                 }
             }
 
+        }
     }
 }
