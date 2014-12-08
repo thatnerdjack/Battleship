@@ -113,5 +113,8 @@ public class Battleship {
             }
 
         }
+        System.out.println("Game Over!");
+        System.out.println("You shot " + shotCount + " times.");
+        System.out.println("Thanks for playing!");
     }
 }
