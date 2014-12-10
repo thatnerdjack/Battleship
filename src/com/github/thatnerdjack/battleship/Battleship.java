@@ -74,12 +74,27 @@ public class Battleship {
     }
 
     public static int yLevelStringToInt(String input) {
-        if (input.length() == 3) {
-            return 10;
+        input = input.substring(0);
+        if (input.equals("1")) {
+            return 0;
+        } else if (input.equals("2")) {
+            return 1;
+        } else if (input.equals("3")) {
+            return 2;
+        } else if (input.equals("4")) {
+            return 3;
+        } else if (input.equals("5")) {
+            return 4;
+        } else if (input.equals("6")) {
+            return 5;
+        } else if (input.equals("7")) {
+            return 6;
+        } else if (input.equals("8")) {
+            return 7;
+        } else if (input.equals("9")) {
+            return 8;
         } else {
-            String tryInput = String.valueOf(input.charAt(1));
-            int iValue = Integer.parseInt(tryInput);
-            return iValue - 1;
+            return 9;
         }
     }
 
@@ -90,7 +105,8 @@ public class Battleship {
     public static void main(String args[]) {
         System.out.println("Hello! Welcome to Battleship!");
         Map rawMap = new Map();
-        Map playerMap = new Map();
+        Map hitMap = new Map();
+        Map missMap = new Map();
         ShipCarrier shipCarrier = new ShipCarrier();
         ShipBattle shipBattle = new ShipBattle();
         ShipSubmarine shipSubmarine = new ShipSubmarine();
@@ -102,7 +118,7 @@ public class Battleship {
         System.out.println("Your task is to destroy these ships.");
         running = true;
         while (running) {
-            Map.printMap(rawMap);
+            Map.printMap(hitMap, missMap);
             String answer = readLine("Please enter your target coordinates:");
             shotCount += 1;
             answer = answer.toLowerCase();
@@ -110,9 +126,10 @@ public class Battleship {
                 int xCoord = xLevelStringToInt(answer);
                 int yCoord = yLevelStringToInt(answer);
                 if (Ship.didHit(xCoord, yCoord, rawMap)) {
-                    playerMap.rows.get(yCoord).set(xCoord, true);
+                    hitMap.rows.get(yCoord).set(xCoord, true);
                     System.out.println("You've shot " + shotCount + " times.");
                 } else {
+                    missMap.rows.get(yCoord).set(xCoord, true);
                     System.out.println("You missed.");
                 }
             }
