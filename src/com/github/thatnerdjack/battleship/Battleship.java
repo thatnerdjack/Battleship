@@ -107,15 +107,16 @@ public class Battleship {
         Map rawMap = new Map();
         Map hitMap = new Map();
         Map missMap = new Map();
-        ShipCarrier shipCarrier = new ShipCarrier();
-        ShipBattle shipBattle = new ShipBattle();
-        ShipSubmarine shipSubmarine = new ShipSubmarine();
-        ShipDestroyer shipDestroyer = new ShipDestroyer();
-        ShipPatrol shipPatrol = new ShipPatrol();
-        ships = new Ship[]{shipCarrier, shipBattle, shipSubmarine, shipDestroyer, shipPatrol};
+        ShipCarrier aiShipCarrier = new ShipCarrier();
+        ShipBattle aiShipBattle = new ShipBattle();
+        ShipSubmarine aiShipSubmarine = new ShipSubmarine();
+        ShipDestroyer aiShipDestroyer = new ShipDestroyer();
+        ShipPatrol aiShipPatrol = new ShipPatrol();
+        ships = new Ship[]{aiShipCarrier, aiShipBattle, aiShipSubmarine, aiShipDestroyer, aiShipPatrol};
         Ship.shipStart(ships, rawMap);
         System.out.println("The ships' have been placed on the map and their positions randomized.");
         System.out.println("Your task is to destroy these ships.");
+        System.out.println(""); //START HERE!!! Start with asking pos for player and move on to making 2 sided game play better
         running = true;
         while (running) {
             Map.printMap(hitMap, missMap);
@@ -132,6 +133,8 @@ public class Battleship {
                     missMap.rows.get(yCoord).set(xCoord, true);
                     System.out.println("You missed.");
                 }
+            } else {
+                System.out.println("Invalid coordinate.");
             }
 
         }

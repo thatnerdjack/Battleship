@@ -27,10 +27,8 @@ abstract public class Ship {
         }
     }
 
-    public void genLocation(Map map) {
+    public void genLocation(Map map, int topLeftX, int topLeftY, int shipSize) {
         if(isVertical) {
-            topLeftY = Battleship.getRandomInt(10 - shipSize);
-            topLeftX = Battleship.getRandomInt(10);
             for(int i = 0; i < shipSize; i++) {
                 xCoords.add(i, topLeftX);
                 yCoords.add(i, topLeftY + i);
@@ -44,7 +42,7 @@ abstract public class Ship {
             }
         }
         if(!doesFit(map)) {
-            genLocation(map);
+            genLocation(map, topLeftX, topLeftY, shipSize);
         }
     }
 
@@ -70,8 +68,26 @@ abstract public class Ship {
 
     public static void shipStart(Ship[] ships, Map map) {
         for(Ship ship : ships) {
-            ship.genLocation(map);
+            int topLeftX = Battleship.getRandomInt(10 - ship.shipSize);
+            int topLeftY = Battleship.getRandomInt(10 - ship.shipSize);
+            ship.genLocation(map, topLeftX, topLeftY, ship.shipSize);
             ship.dropToMap(map);
+        }
+    }
+
+    public static void playerStart(Ship[] ships, Map map) {
+        for(Ship ship : ships) {
+            boolean running = true;
+            while(running) {
+                String coord = Battleship.readLine("Please enter the top left coordinate of your " + ship.shipName + ".");
+                if(Battleship.isValidAnswer(coord)) {
+                    int topLeftX = Battleship.xLevelStringToInt(coord);
+                    int topLeftY = Battleship.yLevelStringToInt(coord);
+                    ship.genLocation(map, topLeftX, topLeftY, ship.shipSize);
+                    ship.dropToMap(map);
+                    running = false;
+                }
+            }
         }
     }
 

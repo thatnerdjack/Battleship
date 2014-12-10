@@ -24,7 +24,7 @@ public class Map {
             String returnString = "";
             for(Boolean isShipThere : innerList) {
                 if(isShipThere) {
-                    returnString += "*";
+                    returnString += "•";
                 } else {
                     returnString += "_";
                 }
@@ -41,7 +41,7 @@ public class Map {
                 boolean didHit = hitMap.rows.get(i).get(i2);
                 boolean didMiss = missMap.rows.get(i).get(i2);
                 if(didHit) {
-                    returnString += "•";
+                    returnString += "*";
                 } else if(didMiss) {
                     returnString += "^";
                 } else {
