@@ -13,6 +13,7 @@ public class Battleship {
     final static String possibleXCoords = "abcdefghij";
     final static String possibleYNums = "123456789";
     static Ship[] ships;
+    static Ship[] playerShips;
     static boolean running;
 
     public static String readLine(String prompt) {
@@ -74,7 +75,7 @@ public class Battleship {
     }
 
     public static int yLevelStringToInt(String input) {
-        input = input.substring(0);
+        input = input.substring(1);
         if (input.equals("1")) {
             return 0;
         } else if (input.equals("2")) {
@@ -105,6 +106,7 @@ public class Battleship {
     public static void main(String args[]) {
         System.out.println("Hello! Welcome to Battleship!");
         Map rawMap = new Map();
+        Map playerMap = new Map();
         Map hitMap = new Map();
         Map missMap = new Map();
         ShipCarrier aiShipCarrier = new ShipCarrier();
@@ -116,10 +118,20 @@ public class Battleship {
         Ship.shipStart(ships, rawMap);
         System.out.println("The ships' have been placed on the map and their positions randomized.");
         System.out.println("Your task is to destroy these ships.");
-        System.out.println(""); //START HERE!!! Start with asking pos for player and move on to making 2 sided game play better
+        System.out.println("Now you will place your ships.");
+        ShipCarrier playerShipCarrier = new ShipCarrier();
+        ShipBattle playerShipBattle = new ShipBattle();
+        ShipSubmarine playerShipSubmarine = new ShipSubmarine();
+        ShipDestroyer playerShipDestroyer = new ShipDestroyer();
+        ShipPatrol playerShipPatrol = new ShipPatrol();
+        playerShips = new Ship[]{playerShipCarrier, playerShipBattle, playerShipSubmarine, playerShipDestroyer, playerShipPatrol};
+        Ship.playerStart(playerShips, playerMap);
         running = true;
         while (running) {
+            System.out.println("Enemy Map:");
             Map.printMap(hitMap, missMap);
+            System.out.println("Your Map:");
+            Map.printMap(playerMap);
             String answer = readLine("Please enter your target coordinates:");
             shotCount += 1;
             answer = answer.toLowerCase();

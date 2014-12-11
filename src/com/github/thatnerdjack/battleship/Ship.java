@@ -28,6 +28,8 @@ abstract public class Ship {
     }
 
     public void genLocation(Map map, int topLeftX, int topLeftY, int shipSize) {
+        xCoords.clear();
+        yCoords.clear();
         if(isVertical) {
             for(int i = 0; i < shipSize; i++) {
                 xCoords.add(i, topLeftX);
@@ -80,9 +82,15 @@ abstract public class Ship {
             boolean running = true;
             while(running) {
                 String coord = Battleship.readLine("Please enter the top left coordinate of your " + ship.shipName + ".");
+                String isVerticalString = Battleship.readLine("Is your " + ship.shipName + " vertical or horizontal? Type 1 for vertical type 0 for horizontal.");
+                if(isVerticalString.equals("1")) {
+                    ship.isVertical = true;
+                } else {
+                    ship.isVertical = false;
+                }
                 if(Battleship.isValidAnswer(coord)) {
-                    int topLeftX = Battleship.xLevelStringToInt(coord);
-                    int topLeftY = Battleship.yLevelStringToInt(coord);
+                    int topLeftX = Battleship.xLevelStringToInt(coord) + 1;
+                    int topLeftY = Battleship.yLevelStringToInt(coord) + 1;
                     ship.genLocation(map, topLeftX, topLeftY, ship.shipSize);
                     ship.dropToMap(map);
                     running = false;
