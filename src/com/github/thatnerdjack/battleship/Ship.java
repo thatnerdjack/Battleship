@@ -63,15 +63,6 @@ abstract public class Ship {
         return true;
     }
 
-    public static void shipStart(Ship[] ships, Map map) {
-        for(Ship ship : ships) {
-            int topLeftX = Battleship.getRandomInt(10 - ship.shipSize);
-            int topLeftY = Battleship.getRandomInt(10 - ship.shipSize);
-            ship.genLocation(map, topLeftX, topLeftY, ship.shipSize);
-            ship.dropToMap(map);
-        }
-    }
-
     public static void playerStart(Ship[] ships, Map map) {
         for(Ship ship : ships) {
             boolean running = true;
@@ -102,7 +93,7 @@ abstract public class Ship {
     public static boolean didHit(int xCoord, int yCoord, Map map) {
         if(map.rows.get(yCoord).get(xCoord)) {
             for(int i = 0; i < 5; i++) {
-                Battleship.ships[i].completeHit(xCoord, yCoord);
+                AIPlayer.AIShips[i].completeHit(xCoord, yCoord);
             }
             return true;
         } else {
@@ -120,7 +111,7 @@ abstract public class Ship {
             }
             int deadShips = 0;
             for(int i = 0; i < 5; i++) {
-                if(Battleship.ships[i].shipHealth < 1) {
+                if(AIPlayer.AIShips[i].shipHealth < 1) {
                     deadShips += 1;
                 }
             }

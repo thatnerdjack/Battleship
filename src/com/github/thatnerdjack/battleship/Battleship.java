@@ -12,7 +12,6 @@ public class Battleship {
     static int shotCount = 0;
     final static String possibleXCoords = "abcdefghij";
     final static String possibleYNums = "123456789";
-    static Ship[] ships;
     static Ship[] playerShips;
     static boolean running;
 
@@ -106,18 +105,12 @@ public class Battleship {
     public static void main(String args[]) {
         System.out.println("Hello! Welcome to Battleship!");
 
-        Map rawMap = new Map();
         Map playerMap = new Map();
         Map hitMap = new Map();
         Map missMap = new Map();
 
-        ShipCarrier aiShipCarrier = new ShipCarrier();
-        ShipBattle aiShipBattle = new ShipBattle();
-        ShipSubmarine aiShipSubmarine = new ShipSubmarine();
-        ShipDestroyer aiShipDestroyer = new ShipDestroyer();
-        ShipPatrol aiShipPatrol = new ShipPatrol();
-        ships = new Ship[]{aiShipCarrier, aiShipBattle, aiShipSubmarine, aiShipDestroyer, aiShipPatrol};
-        Ship.shipStart(ships, rawMap);
+        AIPlayer computer = new AIPlayer();
+        computer.shipStart();
 
         System.out.println("The ships' have been placed on the map and their positions randomized.");
         System.out.println("Your task is to destroy these ships.");
@@ -133,7 +126,7 @@ public class Battleship {
 
         running = true;
         while (running) {
-            Map.printMap(rawMap);
+            Map.printMap(computer.AIMap);
             System.out.println("Enemy Map:");
             Map.printMap(hitMap, missMap);
             System.out.println("Your Map:");
@@ -144,7 +137,7 @@ public class Battleship {
             if (isValidAnswer(answer)) {
                 int xCoord = xLevelStringToInt(answer);
                 int yCoord = yLevelStringToInt(answer);
-                if (Ship.didHit(xCoord, yCoord, rawMap)) {
+                if (Ship.didHit(xCoord, yCoord, computer.AIMap)) {
                     hitMap.rows.get(yCoord).set(xCoord, true);
                     System.out.println("You've shot " + shotCount + " times.");
                 } else {
