@@ -105,10 +105,12 @@ public class Battleship {
 
     public static void main(String args[]) {
         System.out.println("Hello! Welcome to Battleship!");
+
         Map rawMap = new Map();
         Map playerMap = new Map();
         Map hitMap = new Map();
         Map missMap = new Map();
+
         ShipCarrier aiShipCarrier = new ShipCarrier();
         ShipBattle aiShipBattle = new ShipBattle();
         ShipSubmarine aiShipSubmarine = new ShipSubmarine();
@@ -116,9 +118,11 @@ public class Battleship {
         ShipPatrol aiShipPatrol = new ShipPatrol();
         ships = new Ship[]{aiShipCarrier, aiShipBattle, aiShipSubmarine, aiShipDestroyer, aiShipPatrol};
         Ship.shipStart(ships, rawMap);
+
         System.out.println("The ships' have been placed on the map and their positions randomized.");
         System.out.println("Your task is to destroy these ships.");
         System.out.println("Now you will place your ships.");
+
         ShipCarrier playerShipCarrier = new ShipCarrier();
         ShipBattle playerShipBattle = new ShipBattle();
         ShipSubmarine playerShipSubmarine = new ShipSubmarine();
@@ -126,8 +130,10 @@ public class Battleship {
         ShipPatrol playerShipPatrol = new ShipPatrol();
         playerShips = new Ship[]{playerShipCarrier, playerShipBattle, playerShipSubmarine, playerShipDestroyer, playerShipPatrol};
         Ship.playerStart(playerShips, playerMap);
+
         running = true;
         while (running) {
+            Map.printMap(rawMap);
             System.out.println("Enemy Map:");
             Map.printMap(hitMap, missMap);
             System.out.println("Your Map:");

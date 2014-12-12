@@ -36,15 +36,10 @@ abstract public class Ship {
                 yCoords.add(i, topLeftY + i);
             }
         } else {
-            topLeftX = Battleship.getRandomInt(10 - shipSize);
-            topLeftY = Battleship.getRandomInt(10);
             for(int i = 0; i < shipSize; i++) {
                 yCoords.add(i, topLeftY);
                 xCoords.add(i, topLeftX + i);
             }
-        }
-        if(!doesFit(map)) {
-            genLocation(map, topLeftX, topLeftY, shipSize);
         }
     }
 
@@ -61,7 +56,7 @@ abstract public class Ship {
         for(int i = 0; i < shipSize; i++) {
             int xCoord = xCoords.get(i) - 1;
             int yCoord = yCoords.get(i) - 1;
-            if(map.rows.get(yCoord).get(xCoord) == true) {
+            if(xCoord > 9 || yCoord > 9 || map.rows.get(yCoord).get(xCoord) == true) {
                 return false;
             }
         }
@@ -92,8 +87,13 @@ abstract public class Ship {
                     int topLeftX = Battleship.xLevelStringToInt(coord) + 1;
                     int topLeftY = Battleship.yLevelStringToInt(coord) + 1;
                     ship.genLocation(map, topLeftX, topLeftY, ship.shipSize);
-                    ship.dropToMap(map);
-                    running = false;
+                    if(!ship.doesFit(map)) {
+                        System.out.println("ERROR: Invalid Position.");
+                    } else {
+                        ship.dropToMap(map);
+                        running = false;
+                        Map.printMap(map);
+                    }
                 }
             }
         }

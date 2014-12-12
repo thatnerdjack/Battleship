@@ -6,7 +6,7 @@ package com.github.thatnerdjack.battleship;
 public class ShipDestroyer extends Ship{
 
     public ShipDestroyer() {
-        super(3, "submarine");
+        super(3, "destroyer");
     }
 
 }
